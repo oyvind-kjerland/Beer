@@ -56,6 +56,8 @@
     <Compile Include="ANN\Activation Functions\SigmoidActivation.cs" />
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
+    <Compile Include="ANN\Bias.cs" />
+    <Compile Include="ANN\Neuron.cs" />
     <Compile Include="EA\AdultSelector.cs" />
     <Compile Include="EA\DomainSpecific\ANNWeightPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGeneticOperator.cs" />
