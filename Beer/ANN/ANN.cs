@@ -39,16 +39,17 @@ namespace Beer
 
         }
 
-        public void Setup(double[] weights, double[] gains, double[] timeConstants)
+        public void Setup(double[] weights, double[] biasWeights, double[] gains, double[] timeConstants)
         {
             int gainIndex = 0;
             int weightIndex = 0;
+            int biasWeightIndex = 0;
 
             for (int layerIndex=1; layerIndex<layerList.Count; layerIndex++) 
             {
 
                 ANNLayer layer = layerList[layerIndex];
-
+                
                 for (int nodeIndex=1; nodeIndex<layer.nodes.Length; nodeIndex++)
                 {
                     
@@ -57,8 +58,10 @@ namespace Beer
                     node.gain = gains[gainIndex];
                     node.timeConstant = timeConstants[gainIndex];
                     gainIndex++;
-                    
-                    for (int w=0; w<node.weights.Length; w++)
+
+                    node.weights[0] = biasWeights[biasWeightIndex];
+                    biasWeightIndex++;
+                    for (int w=1; w<node.weights.Length; w++)
                     {
                         node.weights[w] = weights[weightIndex];
                         weightIndex++;

@@ -12,7 +12,7 @@ namespace Beer.EA.DomainSpecific
         public double[] Weights { get; set; }
         public double[] Gains { get; set; }
         public double[] TimeConstant { get; set; }
-
+        public double[] BiasWeights { get; set; }
 
         public override string GetPhenotypeString()
         {

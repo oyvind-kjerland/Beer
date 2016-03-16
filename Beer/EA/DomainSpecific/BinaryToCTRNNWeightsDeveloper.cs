@@ -29,7 +29,8 @@ namespace Beer.EA.DomainSpecific
             int totalTimeConstantsBitLength = NumTimeConstants * NumBitsPerUnit;
 
             double[] weights = new double[NumWeights];
-            int weight = 0;
+            double[] biasWeights = new double[BiasIndices.Length];
+            double weight = 0;
             int weightIndex = 0;
             int biasWeightIndex = 0;
 
@@ -45,11 +46,20 @@ namespace Beer.EA.DomainSpecific
                     // Multiplier for scaling the weight interval for bias weights
                     int multiplier = (weightIndex == BiasIndices[biasWeightIndex]) ? -5 : 0;
                     // Calculating a weight between -10 and 0    
-                    weights[weightIndex] = (((double)(weight - max) / max) * 5) + multiplier;
-                    weight = 0;
-                    weightIndex++;
+                    weight = (((double)(weight - max) / max) * 5) + multiplier;
+                    
 
-                    if (weightIndex == BiasIndices[biasWeightIndex]) biasWeightIndex++;
+                    if (weightIndex == BiasIndices[biasWeightIndex])
+                    {
+                        biasWeights[biasWeightIndex] = weight;
+                        biasWeightIndex++;
+                    }
+                    else
+                    {
+                        weights[weightIndex] = weight;
+                        weight = 0;
+                        weightIndex++;
+                    }
                 }
             }
 
@@ -94,6 +104,7 @@ namespace Beer.EA.DomainSpecific
             ctrnntPhenotype.Weights = weights;
             ctrnntPhenotype.Gains = gains;
             ctrnntPhenotype.TimeConstant = timeConstants;
+            ctrnntPhenotype.BiasWeights = biasWeights;
 
             return ctrnntPhenotype;
         }
