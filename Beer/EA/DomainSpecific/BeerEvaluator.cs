@@ -17,10 +17,17 @@ namespace Beer.EA.DomainSpecific
         private BeerWorld beerWorld;
 
 
+        // Settings
+        public int TimeSteps { get; set; }
+
+        public float CatchWeight = 1;
+        public float MissWeight = -1;
+        public float AvoidWeight = 1;
+        public float HitWeight = -1;
+
         public BeerEvaluator()
         {
             beerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
-
         }
 
         public override float Evaluate(Individual individual)
@@ -30,8 +37,20 @@ namespace Beer.EA.DomainSpecific
             beerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.Gains, phenotype.TimeConstant);
 
 
+            // Reset
+            beerWorld.ResetWorld();
 
-            return 0.0f;
+            // Simulate
+            for (int i=0; i<TimeSteps; i++)
+            {
+                beerWorld.Update();
+            }
+
+            // Gather results and aggregate
+            float fitness = beerWorld.ObjectsCaught * CatchWeight + beerWorld.ObjectsMissed * MissWeight
+                + beerWorld.ObjectsAvoided * AvoidWeight + beerWorld.ObjectsHit * HitWeight;
+            
+            return fitness;
             
         }
     }
