@@ -27,7 +27,7 @@ namespace Beer.EA.DomainSpecific
         {
 
             CTRNNPhenotype phenotype = (CTRNNPhenotype)individual.Phenotype;
-            beerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.Gains, phenotype.TimeConstant);
+            //beerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.Gains, phenotype.TimeConstant);
 
 
 

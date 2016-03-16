@@ -151,6 +151,7 @@ namespace Beer
                 {
                     pb = (PictureBox)tableLayoutPanelGrid.GetControlFromPosition(x, y);
                     pb.BackColor = color;
+                    pb.Image = null;
                     pb.Refresh();
                 }
             }
@@ -193,6 +194,7 @@ namespace Beer
 
                     if (sensors == null)
                     {
+                        pb.Image = Properties.Resources.beer;
                         pb.BackColor = color;
                     } else
                     {
