@@ -115,6 +115,7 @@ namespace Beer
                 // Setup Fitness evaluator
                 BeerEvaluator evaluator = new BeerEvaluator();
                 evaluator.BeerWorld.Tracker.ann = ann;
+                evaluator.BeerWorld.WrapAround = true;
 
                 // More hardcoding
                 evaluator.TimeSteps = 600;

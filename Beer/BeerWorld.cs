@@ -13,7 +13,7 @@ namespace Beer
         // Hardcode tracker size and object sizes
         private const int TRACKER_WIDTH = 5;
         private const int MIN_OBJ_WIDTH = 1;
-        private const int MAX_OBJ_WIDTH = 10;
+        private const int MAX_OBJ_WIDTH = 6;
 
 
         public int Width { get; private set; }

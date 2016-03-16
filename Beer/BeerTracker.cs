@@ -26,19 +26,9 @@ namespace Beer
             List<double> outputs = ann.Run(senseUp);
 
             // Find largest output
-            double max = double.MinValue;
-            int maxi = 0;
-            for (int i=0; i<outputs.Count; i++)
-            {
-                if (outputs[i] > max)
-                {
-                    max = outputs[i];
-                    maxi = i;
-                }
-            }
-            maxi -= 1;
+            return (outputs[0] > outputs[1]) ? Move.LEFT : Move.RIGHT;
 
-            return (Move)maxi;
+            
         }
 
 

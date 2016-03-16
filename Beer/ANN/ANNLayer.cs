@@ -28,7 +28,7 @@ namespace Beer
 
             // Populate rest of array with CTR neurons
             int biasCount = (useBiasNode) ? 1 : 0;
-            int numWeights = numNodes + numInputs + biasCount;
+            int numWeights = numNodes + numInputs;
             for (int i = biasCount; i < numNodes; i++)
             {
                 nodes[i] = new Neuron(numWeights);
@@ -38,8 +38,10 @@ namespace Beer
 
         public void Calculate(List<Neuron> prevNodes)
         {
-            // 
-            prevNodes.AddRange(nodes);
+            foreach (Neuron node in nodes)
+            {
+                if (!(node is Bias)) prevNodes.Add(node);
+            }
 
             // Integrate upstream neighbour sum #eq.1 from previous layer and current layer
             for (int i = 0; i < prevNodes.Count; i++)
@@ -67,9 +69,14 @@ namespace Beer
         public List<double> GetOutput()
         {
             List<double> output = new List<double>();
-            foreach (Neuron n in nodes)
+            /*foreach (Neuron n in nodes)
             {
                 output.Add(n.output);
+            }*/
+
+            for (int i=1; i<nodes.Length; i++)
+            {
+                output.Add(nodes[i].output);
             }
 
             return output;
