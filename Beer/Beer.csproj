@@ -56,6 +56,8 @@
     <Compile Include="ANN\Activation Functions\SigmoidActivation.cs" />
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
+    <Compile Include="ANN\Bias.cs" />
+    <Compile Include="ANN\Neuron.cs" />
     <Compile Include="BeerObject.cs" />
     <Compile Include="BeerTracker.cs" />
     <Compile Include="BeerWorld.cs" />
@@ -68,6 +70,8 @@
     <Compile Include="EA\DomainSpecific\BinaryToANNWeightsDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToBinaryDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToSymbolDeveloper.cs" />
+    <Compile Include="EA\DomainSpecific\BinaryToCTRNNEeightsDeveloper.cs" />
+    <Compile Include="EA\DomainSpecific\CTRNNPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\FitnessProportionate.cs" />
     <Compile Include="EA\DomainSpecific\FullSelector.cs" />
     <Compile Include="EA\DomainSpecific\GlobalParentSelector.cs" />
