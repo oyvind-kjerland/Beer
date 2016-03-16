@@ -14,7 +14,7 @@ namespace Beer.EA.DomainSpecific
         private const int WORLD_HEIGHT = 15;
 
 
-        private BeerWorld beerWorld;
+        public BeerWorld BeerWorld { get; set; }
 
 
         // Settings
@@ -27,28 +27,28 @@ namespace Beer.EA.DomainSpecific
 
         public BeerEvaluator()
         {
-            beerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
+            BeerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
         }
 
         public override float Evaluate(Individual individual)
         {
 
             CTRNNPhenotype phenotype = (CTRNNPhenotype)individual.Phenotype;
-            beerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.Gains, phenotype.TimeConstant);
+            BeerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.BiasWeights, phenotype.Gains, phenotype.TimeConstant);
 
 
             // Reset
-            beerWorld.ResetWorld();
+            BeerWorld.ResetWorld();
 
             // Simulate
             for (int i=0; i<TimeSteps; i++)
             {
-                beerWorld.Update();
+                BeerWorld.Update();
             }
 
             // Gather results and aggregate
-            float fitness = beerWorld.ObjectsCaught * CatchWeight + beerWorld.ObjectsMissed * MissWeight
-                + beerWorld.ObjectsAvoided * AvoidWeight + beerWorld.ObjectsHit * HitWeight;
+            float fitness = BeerWorld.ObjectsCaught * CatchWeight + BeerWorld.ObjectsMissed * MissWeight
+                + BeerWorld.ObjectsAvoided * AvoidWeight + BeerWorld.ObjectsHit * HitWeight;
             
             return fitness;
             

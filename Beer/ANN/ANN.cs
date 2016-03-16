@@ -70,6 +70,33 @@ namespace Beer
                 }
             }
         }
+
+        public int GetNumberOfWeights()
+        {
+            int total = 0;
+            
+            for (int i=1; i<layerList.Count; i++)
+            {
+                ANNLayer layer = layerList[i];
+                for (int n=1; n<layer.nodes.Length; n++)
+                {
+                    Neuron node = layer.nodes[n];
+
+                    total += node.weights.Length;
+                }
+            }
+            return total;
+        }
+
+        public int GetNumberOfGains()
+        {
+            int total = 0;
+            for (int i=1; i<layerList.Count; i++)
+            {
+                total += layerList[i].nodes.Length - 1;
+            }
+            return total;
+        }
         
         public List<double> Run(double[] input)
         {

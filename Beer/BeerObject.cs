@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beer
 {
-    class BeerObject
+    public class BeerObject
     {
         public int Width { get; private set; }
         protected int x;

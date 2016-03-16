@@ -52,7 +52,8 @@ namespace Beer.EA.DomainSpecific
                     if (weightIndex == BiasIndices[biasWeightIndex])
                     {
                         biasWeights[biasWeightIndex] = weight;
-                        biasWeightIndex++;
+
+                        if (biasWeightIndex < BiasIndices.Length-1) biasWeightIndex++;
                     }
                     else
                     {
@@ -67,7 +68,7 @@ namespace Beer.EA.DomainSpecific
             int gain = 0;
             int gainIndex = 0;
             // Generate gains part
-            for (int i = totalWeightsBitLength; i < totalGainsBitLength; i++)
+            for (int i = totalWeightsBitLength; i < totalGainsBitLength + totalWeightsBitLength; i++)
             {
 
                 // Convert bits to an int
@@ -86,7 +87,7 @@ namespace Beer.EA.DomainSpecific
             int timeConstant = 0;
             int tcIndex = 0;
             // Generate weight part
-            for (int i = totalGainsBitLength; i < totalTimeConstantsBitLength; i++)
+            for (int i = totalGainsBitLength + totalWeightsBitLength; i < totalTimeConstantsBitLength + totalGainsBitLength + totalWeightsBitLength; i++)
             {
 
                 // Convert bits to an int
