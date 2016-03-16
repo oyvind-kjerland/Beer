@@ -29,13 +29,11 @@ namespace Beer
         private BeerWorld beerWorld;
 
 
-        public Visualizer()
+        public Visualizer(BeerWorld beerWorld)
         {
+
             InitializeComponent();
-
-
-            beerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
-            beerWorld.WrapAround = false;
+            this.beerWorld = beerWorld;
             beerWorld.ResetWorld();
             InitializeGUI();
         }

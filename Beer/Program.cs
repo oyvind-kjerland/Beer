@@ -16,8 +16,8 @@ namespace Beer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            Application.Run(new Visualizer());
+            Application.Run(new Form1());
+            //Application.Run(new Visualizer());
         }
     }
 }

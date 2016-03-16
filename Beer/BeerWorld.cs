@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Beer
 {
 
-    class BeerWorld
+    public class BeerWorld
     {
 
         // Hardcode tracker size and object sizes

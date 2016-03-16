@@ -9,7 +9,7 @@ namespace Beer
 
     public enum Move : int { LEFT = -1, NONE = 0, RIGHT = 1 }
 
-    class BeerTracker : BeerObject
+    public class BeerTracker : BeerObject
     {
 
         public ANN ann;
@@ -23,7 +23,22 @@ namespace Beer
         public Move GetMove(double[] senseUp)
         {
             Sensors = senseUp;
-            return Move.NONE;
+            List<double> outputs = ann.Run(senseUp);
+
+            // Find largest output
+            double max = double.MinValue;
+            int maxi = 0;
+            for (int i=0; i<outputs.Count; i++)
+            {
+                if (outputs[i] > max)
+                {
+                    max = outputs[i];
+                    maxi = i;
+                }
+            }
+            maxi -= 1;
+
+            return (Move)maxi;
         }
 
 
