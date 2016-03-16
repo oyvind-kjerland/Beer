@@ -26,7 +26,12 @@ namespace Beer.EA.DomainSpecific
         public override float Evaluate(Individual individual)
         {
 
-            return 0.0;
+            CTRNNPhenotype phenotype = (CTRNNPhenotype)individual.Phenotype;
+            beerWorld.Tracker.ann.Setup(phenotype.Weights, phenotype.Gains, phenotype.TimeConstant);
+
+
+
+            return 0.0f;
             
         }
     }

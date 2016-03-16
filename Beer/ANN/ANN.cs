@@ -39,6 +39,35 @@ namespace Beer
 
         }
 
+        public void Setup(double[] weights, double[] gains, double[] timeConstants)
+        {
+            int gainIndex = 0;
+            int weightIndex = 0;
+
+            for (int layerIndex=1; layerIndex<layerList.Count; layerIndex++) 
+            {
+
+                ANNLayer layer = layerList[layerIndex];
+
+                for (int nodeIndex=1; nodeIndex<layer.nodes.Length; nodeIndex++)
+                {
+                    
+                    Neuron node = layer.nodes[nodeIndex];
+
+                    node.gain = gains[gainIndex];
+                    node.timeConstant = timeConstants[gainIndex];
+                    gainIndex++;
+                    
+                    for (int w=0; w<node.weights.Length; w++)
+                    {
+                        node.weights[w] = weights[weightIndex];
+                        weightIndex++;
+                    }
+
+                }
+            }
+        }
+        
         public List<double> Run(double[] input)
         {
             // Set motor input as the sensors layers output

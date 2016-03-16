@@ -70,7 +70,7 @@
     <Compile Include="EA\DomainSpecific\BinaryToANNWeightsDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToBinaryDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToSymbolDeveloper.cs" />
-    <Compile Include="EA\DomainSpecific\BinaryToCTRNNEeightsDeveloper.cs" />
+    <Compile Include="EA\DomainSpecific\BinaryToCTRNNWeightsDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\CTRNNPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\FitnessProportionate.cs" />
     <Compile Include="EA\DomainSpecific\FullSelector.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beer.EA.DomainSpecific
 {
-    class BinaryToCTRNNEeightsDeveloper : PhenotypeDeveloper
+    class BinaryToCTRNNWeightsDeveloper : PhenotypeDeveloper
     {
 
         public int NumBitsPerUnit { get; set; }
