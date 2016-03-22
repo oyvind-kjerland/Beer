@@ -20,10 +20,10 @@ namespace Beer.EA.DomainSpecific
         // Settings
         public int TimeSteps { get; set; }
 
-        public float CatchWeight = 50;
-        public float MissWeight = -2;
-        public float AvoidWeight = 10;
-        public float HitWeight = -5;
+        public float CatchWeight = 1;
+        public float MissWeight = -1;
+        public float AvoidWeight = 1.5f;
+        public float HitWeight = -1;
 
         public BeerEvaluator()
         {

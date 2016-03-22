@@ -117,29 +117,33 @@ namespace Beer
             }
 
             // TEMP
-            if (BeerObject == null) return;
+            // Move tracker
+            Tracker.GetMove(Tracker.Sensors);
+
+            MoveTracker(Tracker.currentMove, Tracker.currentSpeed);
 
             // Obtain sensor data
             double[] senseUp = new double[TRACKER_WIDTH];
-            for (int x=0; x<Tracker.Width; x++)
+            if (BeerObject != null)
             {
-                if (x + Tracker.X >= BeerObject.Left && x + Tracker.X < BeerObject.Right)
+                for (int x=0; x<Tracker.Width; x++)
                 {
-                    senseUp[x] = 1;
-                } else
-                {
-                    senseUp[x] = 0;
+                    if (x + Tracker.X >= BeerObject.Left && x + Tracker.X < BeerObject.Right)
+                    {
+                        senseUp[x] = 1;
+                    } else
+                    {
+                        senseUp[x] = 0;
+                    }
                 }
             }
 
-            // Move tracker
-            MoveTracker(Tracker.GetMove(senseUp));
-
+            Tracker.Sensors = senseUp;
         }
 
-        public void MoveTracker(Move move)
+        public void MoveTracker(Move move, int speed)
         {
-            Tracker.X += (int)move;
+            Tracker.X += (int)move * speed;
 
             if (WrapAround) Tracker.X = Utility.Mod(Tracker.X, Width);
 

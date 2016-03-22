@@ -148,8 +148,11 @@ namespace Beer
                 for (int x=0; x<beerWorld.Width; x++)
                 {
                     pb = (PictureBox)tableLayoutPanelGrid.GetControlFromPosition(x, y);
-                    pb.BackColor = color;
-                    pb.Refresh();
+                    if (pb.BackColor != color)
+                    {
+                        pb.BackColor = color;
+                        pb.Refresh();
+                    }
                 }
             }
             
@@ -229,12 +232,12 @@ namespace Beer
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            beerWorld.MoveTracker(Beer.Move.LEFT);
+            beerWorld.MoveTracker(Beer.Move.LEFT, 1);
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            beerWorld.MoveTracker(Beer.Move.RIGHT);
+            beerWorld.MoveTracker(Beer.Move.RIGHT, 1);
         }
     }
 }
