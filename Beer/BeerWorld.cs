@@ -40,6 +40,8 @@ namespace Beer
         // Wrap around world
         public bool WrapAround;
 
+
+
         public BeerWorld(int width, int height)
         {
             // Init width and height

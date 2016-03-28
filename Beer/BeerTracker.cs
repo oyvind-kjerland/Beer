@@ -54,8 +54,9 @@ namespace Beer
             }
 
             // Calculate speed
-            double normalizedOutput = (maxOutput +  5) / 10.0;
-            
+            //double normalizedOutput = (maxOutput +  5) / 10.0;
+            double normalizedOutput = maxOutput;
+
             currentSpeed = (int)Math.Round(maxSpeed * normalizedOutput);
             
         }

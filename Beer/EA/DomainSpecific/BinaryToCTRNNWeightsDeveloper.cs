@@ -54,6 +54,9 @@ namespace Beer.EA.DomainSpecific
                         biasWeights[biasWeightIndex] = weight;
 
                         if (biasWeightIndex < BiasIndices.Length-1) biasWeightIndex++;
+                        weights[weightIndex] = weight;
+                        weight = 0;
+                        weightIndex++;
                     }
                     else
                     {

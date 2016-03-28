@@ -49,6 +49,9 @@ namespace Beer
                 for (int j = 1; j < nodes.Length; j++)
                 {
                     nodes[j].upstreamInput += prevNodes[i].output * nodes[j].weights[i];
+                    double tmp = prevNodes[i].output * nodes[j].weights[i];
+
+                    int a2=0;
                 }
             }
 
