@@ -131,17 +131,6 @@ namespace Beer
 
             // Clear the tracker and the beerObject from the current GUI
             color = EMPTY_COLOR;
-            /*foreach (BeerObject beerObject in beerObjects)
-            {
-                if (beerObject == null) continue;
-
-                for (int x=beerObject.X; x < beerObject.X+beerObject.Width; x++)
-                {
-                    pb = (PictureBox)tableLayoutPanelGrid.GetControlFromPosition(x, top-beerObject.Y);
-                    pb.BackColor = color;
-                    pb.Refresh();
-                }
-            }*/
             
             for (int y=0; y<beerWorld.Height; y++)
             {
@@ -227,6 +216,7 @@ namespace Beer
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            beerWorld.NewSequence();
             backgroundWorker1.RunWorkerAsync();
         }
 

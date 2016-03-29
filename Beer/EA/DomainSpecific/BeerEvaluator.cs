@@ -30,6 +30,11 @@ namespace Beer.EA.DomainSpecific
             BeerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
         }
 
+        public override void NextGeneration()
+        {
+            BeerWorld.NewSequence();
+        }
+
         public override float Evaluate(Individual individual)
         {
 

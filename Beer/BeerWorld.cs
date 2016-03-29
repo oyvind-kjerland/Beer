@@ -40,6 +40,10 @@ namespace Beer
         // Wrap around world
         public bool WrapAround;
 
+        // Sequence (x,width)
+        private List<int[]> sequence;
+        private int sequenceIndex;
+        public int NumObjects = 45;
 
 
         public BeerWorld(int width, int height)
@@ -60,17 +64,40 @@ namespace Beer
 
         }
 
+        public void NewSequence()
+        {
+
+            int x, width;
+            sequence = new List<int[]>();
+
+
+            for (int i = 0; i < NumObjects; i++)
+            {
+                // Calculate a random width
+                width = random.Next(MIN_OBJ_WIDTH, MAX_OBJ_WIDTH + 1);
+
+                // Set a random position
+                x = random.Next(this.Width + 1 - width);
+
+                sequence.Add(new int[2]{x,width});
+            }
+
+        }
+
         public void ResetWorld()
         {
-            SpawnObject();
-            Tracker.SetPosition(CenterX, Bottom);
-
 
             // Setup stats
             ObjectsAvoided = 0;
             ObjectsCaught = 0;
             ObjectsHit = 0;
             ObjectsMissed = 0;
+
+            // Reset sequence
+            sequenceIndex = 0;
+
+            SpawnObject();
+            Tracker.SetPosition(CenterX, Bottom);
 
         }
 
@@ -81,6 +108,7 @@ namespace Beer
             if (BeerObject == null)
             {
                 SpawnObject();
+                UpdateSensors();
             }
 
             // Move object
@@ -118,22 +146,26 @@ namespace Beer
                 BeerObject = null;
             }
 
-            // TEMP
             // Move tracker
             Tracker.GetMove(Tracker.Sensors);
-
             MoveTracker(Tracker.currentMove, Tracker.currentSpeed);
 
             // Obtain sensor data
+            UpdateSensors();
+        }
+
+        public void UpdateSensors()
+        {
             double[] senseUp = new double[TRACKER_WIDTH];
             if (BeerObject != null)
             {
-                for (int x=0; x<Tracker.Width; x++)
+                for (int x = 0; x < Tracker.Width; x++)
                 {
                     if (x + Tracker.X >= BeerObject.Left && x + Tracker.X < BeerObject.Right)
                     {
                         senseUp[x] = 1;
-                    } else
+                    }
+                    else
                     {
                         senseUp[x] = 0;
                     }
@@ -166,15 +198,15 @@ namespace Beer
 
         public void SpawnObject()
         {
-            // Calculate a random width
-            int width = random.Next(MIN_OBJ_WIDTH, MAX_OBJ_WIDTH+1);
+            int[] data = sequence[sequenceIndex];
+            int x = data[0];
+            int width = data[1];
 
             // Create a new BeerObject
             BeerObject = new BeerObject(width, TRACKER_WIDTH);
-
-            // Set a random position
-            int x = random.Next(this.Width+1 - BeerObject.Width);
             BeerObject.SetPosition(x, Top);
+
+            sequenceIndex++;
         }
 
     }

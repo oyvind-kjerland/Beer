@@ -17,7 +17,7 @@ namespace Beer
 
         public Move currentMove;
         public int currentSpeed;
-        private int maxSpeed = 4;
+        private int maxSpeed = 3;
 
         public BeerTracker(int width) : base(width)
         {
@@ -57,7 +57,7 @@ namespace Beer
             //double normalizedOutput = (maxOutput +  5) / 10.0;
             double normalizedOutput = maxOutput;
 
-            currentSpeed = (int)Math.Round(maxSpeed * normalizedOutput);
+            currentSpeed = (int)Math.Ceiling(maxSpeed * normalizedOutput + 1);
             
         }
     }
