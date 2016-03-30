@@ -35,7 +35,7 @@ namespace Beer
         {
             this.Width = width;
             this.IsTracker = false;
-            this.IsBig = (Width > bigThreshold);
+            this.IsBig = (Width >= bigThreshold);
         }
 
 

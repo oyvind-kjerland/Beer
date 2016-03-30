@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Beer
 {
 
-    public enum Move : int { LEFT = -1, NONE = 0, RIGHT = 1 }
+    public enum Move : int { LEFT = -1, PULL = 0, RIGHT = 1 }
 
     public class BeerTracker : BeerObject
     {
@@ -15,32 +15,50 @@ namespace Beer
         public ANN ann;
         public double[] Sensors;
 
+        public Move currentMove;
+        public int currentSpeed;
+        private int maxSpeed = 3;
+
         public BeerTracker(int width) : base(width)
         {
             this.IsTracker = true;
+            Sensors = new double[width];
         }
 
-        public Move GetMove(double[] senseUp)
+        public void GetMove(double[] senseUp)
         {
-            Sensors = senseUp;
+            
             List<double> outputs = ann.Run(senseUp);
 
-            // Find largest output
-            double max = double.MinValue;
-            int maxi = 0;
-            for (int i=0; i<outputs.Count; i++)
+            // Find the largest output
+            int maxIndex = 0;
+            double maxOutput = outputs[0];
+            for (int i=1; i<outputs.Count; i++)
             {
-                if (outputs[i] > max)
+                if (outputs[i] > maxOutput)
                 {
-                    max = outputs[i];
-                    maxi = i;
+                    maxOutput = outputs[i];
+                    maxIndex = i;
                 }
             }
-            maxi -= 1;
+            
+            // Pull is included
+            if (outputs.Count == 3)
+            {
+                currentMove = (Move)(maxIndex-1);
 
-            return (Move)maxi;
+            // Only left and right movement
+            } else
+            {
+                currentMove = (maxIndex == 0) ? Move.LEFT : Move.RIGHT;
+            }
+
+            // Calculate speed
+            //double normalizedOutput = (maxOutput +  5) / 10.0;
+            double normalizedOutput = maxOutput;
+
+            currentSpeed = (int)Math.Ceiling(maxSpeed * normalizedOutput + 1);
+            
         }
-
-
     }
 }

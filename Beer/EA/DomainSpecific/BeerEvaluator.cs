@@ -22,12 +22,17 @@ namespace Beer.EA.DomainSpecific
 
         public float CatchWeight = 1;
         public float MissWeight = -1;
-        public float AvoidWeight = 1;
+        public float AvoidWeight = 1.5f;
         public float HitWeight = -1;
 
         public BeerEvaluator()
         {
             BeerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
+        }
+
+        public override void NextGeneration()
+        {
+            BeerWorld.NewSequence();
         }
 
         public override float Evaluate(Individual individual)

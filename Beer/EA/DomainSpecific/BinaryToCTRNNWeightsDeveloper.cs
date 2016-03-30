@@ -46,7 +46,7 @@ namespace Beer.EA.DomainSpecific
                     // Multiplier for scaling the weight interval for bias weights
                     int multiplier = (weightIndex == BiasIndices[biasWeightIndex]) ? -5 : 0;
                     // Calculating a weight between -10 and 0    
-                    weight = (((double)(weight - max) / max) * 5) + multiplier;
+                    weight = (((double)(weight) / max) * 5) + multiplier;
                     
 
                     if (weightIndex == BiasIndices[biasWeightIndex])
@@ -54,6 +54,9 @@ namespace Beer.EA.DomainSpecific
                         biasWeights[biasWeightIndex] = weight;
 
                         if (biasWeightIndex < BiasIndices.Length-1) biasWeightIndex++;
+                        weights[weightIndex] = weight;
+                        weight = 0;
+                        weightIndex++;
                     }
                     else
                     {
@@ -77,7 +80,7 @@ namespace Beer.EA.DomainSpecific
                 if (i % NumBitsPerUnit == NumBitsPerUnit - 1)
                 {
                     // Calculating a weight between 1 and 5
-                    gains[gainIndex] = (((double)(gain - max / 2) / max) * 2) + 3;
+                    gains[gainIndex] = (((double)(gain) / max) * 4) + 1;
                     gain = 0;
                     gainIndex++;
                 }
@@ -96,7 +99,7 @@ namespace Beer.EA.DomainSpecific
                 if (i % NumBitsPerUnit == NumBitsPerUnit - 1)
                 {
                     // Calculating a weight between 1 and 2
-                    timeConstants[tcIndex] = ((double)(timeConstant - max / 2) / max) + 2;
+                    timeConstants[tcIndex] = ((double)(timeConstant) / max) + 1;
                     timeConstant = 0;
                     tcIndex++;
                 }
