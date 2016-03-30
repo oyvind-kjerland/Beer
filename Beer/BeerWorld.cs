@@ -43,7 +43,7 @@ namespace Beer
         // Sequence (x,width)
         private List<int[]> sequence;
         private int sequenceIndex;
-        public int NumObjects = 45;
+        public int NumObjects = 600;
 
 
         public BeerWorld(int width, int height)
@@ -69,7 +69,7 @@ namespace Beer
 
             int x, width;
             sequence = new List<int[]>();
-
+            sequenceIndex = 0;
 
             for (int i = 0; i < NumObjects; i++)
             {
@@ -150,6 +150,8 @@ namespace Beer
         // Check if the tracker hits the beerObject
         public void CheckHit()
         {
+            if (BeerObject == null) return;
+
             // Big Beer object
             if (BeerObject.IsBig)
             {

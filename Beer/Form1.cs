@@ -76,9 +76,13 @@ namespace Beer
         {
             if (comboBoxProblem.SelectedIndex == CTRNN_INDEX)
             {
+
+                // Temp
+                bool hasPull = true;
+
                 // setup nodes
                 int numSensorNodes = 5;
-                int numMotorNodes = 2;
+                int numMotorNodes = (hasPull) ? 3 : 2;
                 int numLayers = 1;
                 int[] numNodesPerLayer = new int[] { 2 };
 
@@ -108,7 +112,7 @@ namespace Beer
                 developer.NumWeights = numWeights;
 
                 // Hardcoded :D
-                developer.BiasIndices = new int[] { 0, 6, 12, 15 };
+                developer.BiasIndices = (!hasPull) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
 
                 eaLoop.PhenotypeDeveloper = developer;
 
