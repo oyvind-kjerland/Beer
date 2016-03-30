@@ -66,40 +66,41 @@ namespace Beer
             }
 
             // Get speed
-            bool includeZero = true;
+            bool includeZero = false;
 
             if (includeZero)
             {
                 if (maxOutput <= 0.2)
                 {
-                    currentSpeed = 0;
+                    currentSpeed = 4;
                 } else if (maxOutput <= 0.4)
                 {
-                    currentSpeed = 1;
+                    currentSpeed = 3;
                 } else if (maxOutput <= 0.6)
                 {
                     currentSpeed = 2;
                 } else if (maxOutput <= 0.8)
                 {
-                    currentSpeed = 3;
+                    currentSpeed = 1;
                 } else if (maxOutput <= 1.0)
                 {
-                    currentSpeed = 4;
+                    currentSpeed = 0;
                 }
             } else
             {
                 if (maxOutput <= 0.25)
                 {
-                    currentSpeed = 1;
+                    currentSpeed = 4;
                 } else if (maxOutput <= 0.5)
                 {
-                    currentSpeed = 2;
+                    currentSpeed = 3;
                 } else if (maxOutput <= 0.75)
                 {
-                    currentSpeed = 3;
+                    currentSpeed = 2;
                 } else if (maxOutput <= 1)
                 {
-                    currentSpeed = 4;
+
+                    currentSpeed = 1;
                 }
             }
             
