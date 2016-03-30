@@ -57,7 +57,55 @@ namespace Beer
             //double normalizedOutput = (maxOutput +  5) / 10.0;
             double normalizedOutput = maxOutput;
 
-            currentSpeed = (int)Math.Ceiling(maxSpeed * normalizedOutput + 1);
+            //currentSpeed = (int)Math.Ceiling(maxSpeed * normalizedOutput + 1);
+            //currentSpeed = 2;
+
+            if (maxOutput < 0.9)
+            {
+                currentSpeed = 2;
+            }
+
+            // Get speed
+            bool includeZero = false;
+
+            if (includeZero)
+            {
+                if (maxOutput <= 0.2)
+                {
+                    currentSpeed = 4;
+                } else if (maxOutput <= 0.4)
+                {
+                    currentSpeed = 3;
+                } else if (maxOutput <= 0.6)
+                {
+                    currentSpeed = 2;
+                } else if (maxOutput <= 0.8)
+                {
+                    currentSpeed = 1;
+                } else if (maxOutput <= 1.0)
+                {
+                    currentSpeed = 0;
+                }
+            } else
+            {
+                if (maxOutput <= 0.25)
+                {
+                    currentSpeed = 4;
+                } else if (maxOutput <= 0.5)
+                {
+                    currentSpeed = 3;
+                } else if (maxOutput <= 0.75)
+                {
+                    currentSpeed = 2;
+                } else if (maxOutput <= 1)
+                {
+
+                    currentSpeed = 1;
+                }
+            }
+            
+
+            
             
         }
     }
