@@ -45,6 +45,7 @@ namespace Beer
             int weightIndex = 0;
             int biasWeightIndex = 0;
 
+
             for (int layerIndex=1; layerIndex<layerList.Count; layerIndex++) 
             {
 
@@ -66,6 +67,8 @@ namespace Beer
                         node.weights[w] = weights[weightIndex];
                         weightIndex++;
                     }
+
+                    node.Reset();
 
                 }
             }

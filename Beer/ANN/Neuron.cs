@@ -39,5 +39,11 @@ namespace Beer
         {
             output = 1.0 / (1 + Math.Pow(Math.E, -gain * internalState));
         }
+
+        public void Reset()
+        {
+            internalState = 0;
+            output = 0;
+        }
     }
 }
