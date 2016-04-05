@@ -41,6 +41,7 @@
             this.labelAvoided = new System.Windows.Forms.Label();
             this.labelMissed = new System.Windows.Forms.Label();
             this.labelHit = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericTimesteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericInterval)).BeginInit();
             this.SuspendLayout();
@@ -189,11 +190,22 @@
             this.labelHit.TabIndex = 11;
             this.labelHit.Text = "hit";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(537, 350);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Show Network";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Visualizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 507);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.labelHit);
             this.Controls.Add(this.labelMissed);
             this.Controls.Add(this.labelAvoided);
@@ -231,5 +243,6 @@
         private System.Windows.Forms.Label labelAvoided;
         private System.Windows.Forms.Label labelMissed;
         private System.Windows.Forms.Label labelHit;
+        private System.Windows.Forms.Button button1;
     }
 }

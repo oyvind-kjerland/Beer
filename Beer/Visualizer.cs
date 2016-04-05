@@ -229,5 +229,11 @@ namespace Beer
         {
             beerWorld.MoveTracker(Beer.Move.RIGHT, 1);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NN_Visualizer nnv = new NN_Visualizer(beerWorld.Tracker.ann);
+            nnv.ShowDialog();
+        }
     }
 }

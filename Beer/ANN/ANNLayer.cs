@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beer
 {
-    class ANNLayer
+    public class ANNLayer
     {
         public Neuron[] nodes;
 

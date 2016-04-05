@@ -117,5 +117,7 @@ namespace Beer
             // Return output from motor layer
             return layerList.Last().GetOutput();
         }
+
+        public List<ANNLayer> GetLayers() { return layerList; }
     }
 }

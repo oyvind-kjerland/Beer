@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beer
 {
-    class Neuron
+    public class Neuron
     {
         public double upstreamInput { get; set; }
 
