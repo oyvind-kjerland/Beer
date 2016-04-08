@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.startButton = new System.Windows.Forms.Button();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
             this.labelProblem = new System.Windows.Forms.Label();
@@ -65,18 +65,9 @@
             this.numericRankMin = new System.Windows.Forms.NumericUpDown();
             this.checkBoxSd = new System.Windows.Forms.CheckBox();
             this.checkBoxElitism = new System.Windows.Forms.CheckBox();
-            this.listBoxANN = new System.Windows.Forms.ListBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numericNumNodes = new System.Windows.Forms.NumericUpDown();
-            this.buttonRemoveLayer = new System.Windows.Forms.Button();
-            this.buttonAddLayer = new System.Windows.Forms.Button();
             this.buttonShowSimulation = new System.Windows.Forms.Button();
-            this.numericNumBoards = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.checkBoxDynamic = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.numericBitsPerWeight = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxBiasNode = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossoverNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationNumeric)).BeginInit();
@@ -88,8 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericNumRuns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumNodes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumBoards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericBitsPerWeight)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,16 +163,16 @@
             // 
             // chart1
             // 
-            chartArea1.AxisX.Maximum = 100D;
-            chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisX.Title = "Generation";
-            chartArea1.AxisY.Title = "Fitness";
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.AxisX.Maximum = 100D;
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.Title = "Generation";
+            chartArea2.AxisY.Title = "Fitness";
+            chartArea2.CursorX.IsUserSelectionEnabled = true;
+            chartArea2.CursorY.IsUserSelectionEnabled = true;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(12, 295);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(871, 268);
@@ -587,61 +576,6 @@
             this.checkBoxElitism.Text = "Elitism";
             this.checkBoxElitism.UseVisualStyleBackColor = true;
             // 
-            // listBoxANN
-            // 
-            this.listBoxANN.FormattingEnabled = true;
-            this.listBoxANN.Location = new System.Drawing.Point(130, 38);
-            this.listBoxANN.Name = "listBoxANN";
-            this.listBoxANN.Size = new System.Drawing.Size(93, 56);
-            this.listBoxANN.TabIndex = 48;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 103);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(167, 13);
-            this.label6.TabIndex = 50;
-            this.label6.Text = "Number of nodes in selected layer";
-            // 
-            // numericNumNodes
-            // 
-            this.numericNumNodes.Location = new System.Drawing.Point(181, 101);
-            this.numericNumNodes.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericNumNodes.Name = "numericNumNodes";
-            this.numericNumNodes.Size = new System.Drawing.Size(42, 20);
-            this.numericNumNodes.TabIndex = 49;
-            this.numericNumNodes.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.numericNumNodes.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // buttonRemoveLayer
-            // 
-            this.buttonRemoveLayer.Location = new System.Drawing.Point(15, 71);
-            this.buttonRemoveLayer.Name = "buttonRemoveLayer";
-            this.buttonRemoveLayer.Size = new System.Drawing.Size(109, 23);
-            this.buttonRemoveLayer.TabIndex = 52;
-            this.buttonRemoveLayer.Text = "Remove Layer";
-            this.buttonRemoveLayer.UseVisualStyleBackColor = true;
-            this.buttonRemoveLayer.Click += new System.EventHandler(this.buttonRemoveLayer_Click);
-            // 
-            // buttonAddLayer
-            // 
-            this.buttonAddLayer.Location = new System.Drawing.Point(15, 38);
-            this.buttonAddLayer.Name = "buttonAddLayer";
-            this.buttonAddLayer.Size = new System.Drawing.Size(109, 23);
-            this.buttonAddLayer.TabIndex = 51;
-            this.buttonAddLayer.Text = "Add Layer";
-            this.buttonAddLayer.UseVisualStyleBackColor = true;
-            this.buttonAddLayer.Click += new System.EventHandler(this.buttonAddLayer_Click);
-            // 
             // buttonShowSimulation
             // 
             this.buttonShowSimulation.Location = new System.Drawing.Point(374, 262);
@@ -651,54 +585,6 @@
             this.buttonShowSimulation.Text = "Show Simulation";
             this.buttonShowSimulation.UseVisualStyleBackColor = true;
             this.buttonShowSimulation.Click += new System.EventHandler(this.buttonShowSimulation_Click);
-            // 
-            // numericNumBoards
-            // 
-            this.numericNumBoards.Location = new System.Drawing.Point(181, 157);
-            this.numericNumBoards.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericNumBoards.Name = "numericNumBoards";
-            this.numericNumBoards.Size = new System.Drawing.Size(42, 20);
-            this.numericNumBoards.TabIndex = 54;
-            this.numericNumBoards.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 159);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 13);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Number of boards";
-            // 
-            // checkBoxDynamic
-            // 
-            this.checkBoxDynamic.AutoSize = true;
-            this.checkBoxDynamic.Checked = true;
-            this.checkBoxDynamic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxDynamic.Location = new System.Drawing.Point(156, 183);
-            this.checkBoxDynamic.Name = "checkBoxDynamic";
-            this.checkBoxDynamic.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxDynamic.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxDynamic.TabIndex = 56;
-            this.checkBoxDynamic.Text = "Dynamic";
-            this.checkBoxDynamic.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 130);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(127, 13);
-            this.label8.TabIndex = 58;
-            this.label8.Text = "Number of bits per weight";
             // 
             // numericBitsPerWeight
             // 
@@ -717,18 +603,14 @@
             0,
             0});
             // 
-            // checkBoxBiasNode
+            // label8
             // 
-            this.checkBoxBiasNode.AutoSize = true;
-            this.checkBoxBiasNode.Checked = true;
-            this.checkBoxBiasNode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBiasNode.Location = new System.Drawing.Point(126, 206);
-            this.checkBoxBiasNode.Name = "checkBoxBiasNode";
-            this.checkBoxBiasNode.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxBiasNode.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxBiasNode.TabIndex = 59;
-            this.checkBoxBiasNode.Text = "Use Bias Node";
-            this.checkBoxBiasNode.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 130);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(127, 13);
+            this.label8.TabIndex = 58;
+            this.label8.Text = "Number of bits per weight";
             // 
             // Form1
             // 
@@ -736,18 +618,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(895, 574);
-            this.Controls.Add(this.checkBoxBiasNode);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.numericBitsPerWeight);
-            this.Controls.Add(this.checkBoxDynamic);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.numericNumBoards);
             this.Controls.Add(this.buttonShowSimulation);
-            this.Controls.Add(this.buttonRemoveLayer);
-            this.Controls.Add(this.buttonAddLayer);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.numericNumNodes);
-            this.Controls.Add(this.listBoxANN);
             this.Controls.Add(this.checkBoxElitism);
             this.Controls.Add(this.checkBoxSd);
             this.Controls.Add(this.labelRankMax);
@@ -797,8 +670,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericNumRuns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumNodes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumBoards)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericBitsPerWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -842,18 +713,9 @@
         private System.Windows.Forms.NumericUpDown numericRankMin;
         private System.Windows.Forms.CheckBox checkBoxSd;
         private System.Windows.Forms.CheckBox checkBoxElitism;
-        private System.Windows.Forms.ListBox listBoxANN;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericNumNodes;
-        private System.Windows.Forms.Button buttonRemoveLayer;
-        private System.Windows.Forms.Button buttonAddLayer;
         private System.Windows.Forms.Button buttonShowSimulation;
-        private System.Windows.Forms.NumericUpDown numericNumBoards;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBoxDynamic;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown numericBitsPerWeight;
-        private System.Windows.Forms.CheckBox checkBoxBiasNode;
+        private System.Windows.Forms.Label label8;
     }
 }
 
