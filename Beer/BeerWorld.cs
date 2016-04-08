@@ -43,7 +43,7 @@ namespace Beer
         // Sequence (x,width)
         private List<int[]> sequence;
         private int sequenceIndex;
-        public int NumObjects = 45;
+        public int NumObjects = 600;
 
 
         public BeerWorld(int width, int height)
@@ -69,7 +69,7 @@ namespace Beer
 
             int x, width;
             sequence = new List<int[]>();
-
+            sequenceIndex = 0;
 
             for (int i = 0; i < NumObjects; i++)
             {
@@ -86,7 +86,8 @@ namespace Beer
 
         public void ResetWorld()
         {
-
+            
+            
             // Setup stats
             ObjectsAvoided = 0;
             ObjectsCaught = 0;
@@ -117,41 +118,66 @@ namespace Beer
             // Check if the object is at the same level as the tracker
             if (BeerObject.Y == Bottom)
             {
-                // Big Beer object
-                if (BeerObject.IsBig)
-                {
-                    if (BeerObject.Left > Tracker.Right || BeerObject.Right < Tracker.Left)
-                    {
-                        ObjectsAvoided++;
-                    } else
-                    {
-                        ObjectsHit++;
-                    }
-
-                // Small Beer object
-                } else
-                {
-                    // Check capture
-                    if (BeerObject.Left >= Tracker.Left && BeerObject.Right <= Tracker.Right)
-                    {
-                        ObjectsCaught++;
-                    } else
-                    {
-                        ObjectsMissed++;
-                    }
-                }
-
+                CheckHit();
 
                 // Remove object
                 BeerObject = null;
             }
 
-            // Move tracker
+            // Find next move
             Tracker.GetMove(Tracker.Sensors);
-            MoveTracker(Tracker.currentMove, Tracker.currentSpeed);
+
+            if (Tracker.currentMove == Move.PULL)
+            {
+                // Pull
+                Pull();
+            } else
+            {
+                // Move tracker
+                MoveTracker(Tracker.currentMove, Tracker.currentSpeed);
+            }
 
             // Obtain sensor data
             UpdateSensors();
+        }
+
+        public void Pull()
+        {
+            CheckHit();
+            BeerObject = null;
+        }
+
+        // Check if the tracker hits the beerObject
+        public void CheckHit()
+        {
+            if (BeerObject == null) return;
+
+            // Big Beer object
+            if (BeerObject.IsBig)
+            {
+                if (BeerObject.Left > Tracker.Right || BeerObject.Right < Tracker.Left)
+                {
+                    ObjectsAvoided++;
+                }
+                else
+                {
+                    ObjectsHit++;
+                }
+
+            // Small Beer object
+            }
+            else
+            {
+                // Check capture
+                if (BeerObject.Left >= Tracker.Left && BeerObject.Right <= Tracker.Right)
+                {
+                    ObjectsCaught++;
+                }
+                else
+                {
+                    ObjectsMissed++;
+                }
+            }
         }
 
         public void UpdateSensors()
@@ -179,19 +205,19 @@ namespace Beer
         {
             Tracker.X += (int)move * speed;
 
-            if (WrapAround) Tracker.X = Utility.Mod(Tracker.X, Width);
-
-
-            // Check bounds
-            if (!WrapAround)
+            if (WrapAround)
+            {
+                Tracker.X = Utility.Mod(Tracker.X, Width);
+            }
+            else
             {
                 if (Tracker.X < 0)
                 {
                     Tracker.X = 0;
                 }
-                else if (Tracker.Right > Width )
+                else if (Tracker.Right >= Width)
                 {
-                    Tracker.X -= 1;
+                    Tracker.X = Width - Tracker.Width;
                 }
             }
         }

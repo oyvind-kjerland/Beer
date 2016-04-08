@@ -34,10 +34,7 @@ namespace Beer
         private string currentSdString;
 
         // Problem constants
-        private const int STANDARD_INDEX = 0;
-        private const int PULL_INDEX = 0;
-        private const int NO_WRAP_INDEX = 0;
-
+        private const int CTRNN_INDEX = 0;
 
         // Adult selection constants
         private const int FULL_INDEX = 0;
@@ -65,67 +62,79 @@ namespace Beer
             comboBoxProblem.SelectedIndex = 0;
             comboBoxAdultSelector.SelectedIndex = 0;
             comboBoxParentSelector.SelectedIndex = TOURNAMENT_INDEX;
+
+
+
+            Tuple<int, int> t = new Tuple<int, int>(1,2);
+            Tuple<int, int> t2 = t;
             
+
         }
 
 
         private void SetupProblem()
         {
-            
-            // setup nodes
-            int numSensorNodes = (comboBoxProblem.SelectedIndex == NO_WRAP_INDEX) ? 7 : 5;
-            int numMotorNodes = (comboBoxProblem.SelectedIndex == PULL_INDEX) ? 3 : 2;
-            int numLayers = 1;
-            int[] numNodesPerLayer = new int[] { 2 };
+            if (comboBoxProblem.SelectedIndex == CTRNN_INDEX)
+            {
 
-            // Activation function is not used
-            ActivationFunction activationfunction = null;
-            ANN ann = new ANN(numSensorNodes, numMotorNodes, numLayers, numNodesPerLayer, activationfunction, true);
+                // Temp
+                bool hasPull = true;
 
-            int numWeights = ann.GetNumberOfWeights();
-            int numGains = ann.GetNumberOfGains();
-            int numTimeConstants = numGains;
+                // setup nodes
+                int numSensorNodes = 5;
+                int numMotorNodes = (hasPull) ? 3 : 2;
+                int numLayers = 1;
+                int[] numNodesPerLayer = new int[] { 2 };
 
-            // Setup child population
-            int childCount = (int)numericChildCount.Value;
-            eaLoop.ChildCount = childCount;
+                // Activation function is not used
+                ActivationFunction activationfunction = null;
+                ANN ann = new ANN(numSensorNodes, numMotorNodes, numLayers, numNodesPerLayer, activationfunction, true);
 
-            // Setup genotype
-            int numBitsPerUnit = (int)numericBitsPerWeight.Value;
+                int numWeights = ann.GetNumberOfWeights();
+                int numGains = ann.GetNumberOfGains();
+                int numTimeConstants = numGains;
 
-            int numBits = numBitsPerUnit * (numWeights + numGains + numTimeConstants);
-            eaLoop.Genotype = new BinaryGenotype(numBits);
+                // Setup child population
+                int childCount = (int)numericChildCount.Value;
+                eaLoop.ChildCount = childCount;
 
-            // Setup phenotype developer
-            BinaryToCTRNNWeightsDeveloper developer = new BinaryToCTRNNWeightsDeveloper();
-            developer.NumBitsPerUnit = numBitsPerUnit;
-            developer.NumGains = numGains;
-            developer.NumTimeConstants = numTimeConstants;
-            developer.NumWeights = numWeights;
+                // Setup genotype
+                int numBitsPerUnit = (int)numericBitsPerWeight.Value;
 
-            // Hardcoded :D
-            developer.BiasIndices = new int[] { 0, 6, 12, 15 };
+                int numBits = numBitsPerUnit * (numWeights + numGains + numTimeConstants);
+                eaLoop.Genotype = new BinaryGenotype(numBits);
 
-            eaLoop.PhenotypeDeveloper = developer;
+                // Setup phenotype developer
+                BinaryToCTRNNWeightsDeveloper developer = new BinaryToCTRNNWeightsDeveloper();
+                developer.NumBitsPerUnit = numBitsPerUnit;
+                developer.NumGains = numGains;
+                developer.NumTimeConstants = numTimeConstants;
+                developer.NumWeights = numWeights;
 
-            // Setup Fitness evaluator
-            BeerEvaluator evaluator = new BeerEvaluator();
-            evaluator.BeerWorld.Tracker.ann = ann;
-            evaluator.BeerWorld.WrapAround = true;
+                // Hardcoded :D
+                developer.BiasIndices = (!hasPull) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
 
-            // More hardcoding
-            evaluator.TimeSteps = 600;
+                eaLoop.PhenotypeDeveloper = developer;
 
-            eaLoop.FitnessEvaluator = evaluator;
+                // Setup Fitness evaluator
+                BeerEvaluator evaluator = new BeerEvaluator();
+                evaluator.BeerWorld.Tracker.ann = ann;
+                evaluator.BeerWorld.WrapAround = true;
 
-            // Set genetic operator
-            BinaryGeneticOperator op = new BinaryGeneticOperator();
-            op.MutationRate = (float)mutationNumeric.Value;
-            op.CrossoverRate = (float)crossoverNumeric.Value;
-            eaLoop.GeneticOperator = op;
+                // More hardcoding
+                evaluator.TimeSteps = 600;
+
+                eaLoop.FitnessEvaluator = evaluator;
+
+                // Set genetic operator
+                BinaryGeneticOperator op = new BinaryGeneticOperator();
+                op.MutationRate = (float)mutationNumeric.Value;
+                op.CrossoverRate = (float)crossoverNumeric.Value;
+                eaLoop.GeneticOperator = op;
 
 
-            eaLoop.goal = int.MaxValue;
+                eaLoop.goal = int.MaxValue;
+            }
         }
 
         private void SetupAdultSelector()
@@ -491,7 +500,33 @@ namespace Beer
 
         }
 
-      
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            // Do nothing if no layer is selected
+            if (listBoxANN.SelectedIndex < 0) return;
+
+            listBoxANN.Items[listBoxANN.SelectedIndex] = (int)numericNumNodes.Value;
+        }
+
+        private void buttonAddLayer_Click(object sender, EventArgs e)
+        {
+            // Add a new layer
+            listBoxANN.Items.Add((int)numericNumNodes.Value);
+        }
+
+        private void buttonRemoveLayer_Click(object sender, EventArgs e)
+        {
+            // Do nothing if no layer is selected
+            if (listBoxANN.SelectedIndex < 0) return;
+
+            // Remove the selected index
+            listBoxANN.Items.RemoveAt(listBoxANN.SelectedIndex);
+        }
 
         private void buttonShowSimulation_Click(object sender, EventArgs e)
         {
