@@ -34,7 +34,10 @@ namespace Beer
         private string currentSdString;
 
         // Problem constants
-        private const int CTRNN_INDEX = 0;
+        private const int STANDARD_SCENARIO = 0;
+        private const int PULL_SCENARIO = 1;
+        private const int NO_WRAP_SCENARIO = 2;
+
 
         // Adult selection constants
         private const int FULL_INDEX = 0;
@@ -62,79 +65,67 @@ namespace Beer
             comboBoxProblem.SelectedIndex = 0;
             comboBoxAdultSelector.SelectedIndex = 0;
             comboBoxParentSelector.SelectedIndex = TOURNAMENT_INDEX;
-
-
-
-            Tuple<int, int> t = new Tuple<int, int>(1,2);
-            Tuple<int, int> t2 = t;
-            
-
         }
 
 
         private void SetupProblem()
         {
-            if (comboBoxProblem.SelectedIndex == CTRNN_INDEX)
-            {
+         
+            // setup nodes
+            int numSensorNodes = (comboBoxProblem.SelectedIndex == NO_WRAP_SCENARIO) ? 7 : 5;
+            int numMotorNodes = (comboBoxProblem.SelectedIndex == PULL_SCENARIO) ? 3 : 2;
+            int numLayers = 1;
+            int[] numNodesPerLayer = new int[] { 2 };
 
-                // Temp
-                bool hasPull = true;
+            // Activation function is not used
+            ActivationFunction activationfunction = null;
+            ANN ann = new ANN(numSensorNodes, numMotorNodes, numLayers, numNodesPerLayer, activationfunction, true);
 
-                // setup nodes
-                int numSensorNodes = 5;
-                int numMotorNodes = (hasPull) ? 3 : 2;
-                int numLayers = 1;
-                int[] numNodesPerLayer = new int[] { 2 };
+            int numWeights = ann.GetNumberOfWeights();
+            int numGains = ann.GetNumberOfGains();
+            int numTimeConstants = numGains;
 
-                // Activation function is not used
-                ActivationFunction activationfunction = null;
-                ANN ann = new ANN(numSensorNodes, numMotorNodes, numLayers, numNodesPerLayer, activationfunction, true);
+            // Setup child population
+            int childCount = (int)numericChildCount.Value;
+            eaLoop.ChildCount = childCount;
 
-                int numWeights = ann.GetNumberOfWeights();
-                int numGains = ann.GetNumberOfGains();
-                int numTimeConstants = numGains;
+            // Setup genotype
+            int numBitsPerUnit = (int)numericBitsPerWeight.Value;
 
-                // Setup child population
-                int childCount = (int)numericChildCount.Value;
-                eaLoop.ChildCount = childCount;
+            int numBits = numBitsPerUnit * (numWeights + numGains + numTimeConstants);
+            eaLoop.Genotype = new BinaryGenotype(numBits);
 
-                // Setup genotype
-                int numBitsPerUnit = (int)numericBitsPerWeight.Value;
+            // Setup phenotype developer
+            BinaryToCTRNNWeightsDeveloper developer = new BinaryToCTRNNWeightsDeveloper();
+            developer.NumBitsPerUnit = numBitsPerUnit;
+            developer.NumGains = numGains;
+            developer.NumTimeConstants = numTimeConstants;
+            developer.NumWeights = numWeights;
 
-                int numBits = numBitsPerUnit * (numWeights + numGains + numTimeConstants);
-                eaLoop.Genotype = new BinaryGenotype(numBits);
+            // Hardcoded :D
+            developer.BiasIndices = (comboBoxProblem.SelectedIndex != PULL_SCENARIO) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
 
-                // Setup phenotype developer
-                BinaryToCTRNNWeightsDeveloper developer = new BinaryToCTRNNWeightsDeveloper();
-                developer.NumBitsPerUnit = numBitsPerUnit;
-                developer.NumGains = numGains;
-                developer.NumTimeConstants = numTimeConstants;
-                developer.NumWeights = numWeights;
+            eaLoop.PhenotypeDeveloper = developer;
 
-                // Hardcoded :D
-                developer.BiasIndices = (!hasPull) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
+            // Setup Fitness evaluator
+            BeerEvaluator evaluator = new BeerEvaluator();
+            evaluator.SetWeights(comboBoxProblem.SelectedIndex);
+            evaluator.BeerWorld.Tracker.ann = ann;
+            evaluator.BeerWorld.WrapAround = (comboBoxProblem.SelectedIndex != NO_WRAP_SCENARIO);
 
-                eaLoop.PhenotypeDeveloper = developer;
+            // More hardcoding
+            evaluator.TimeSteps = 600;
 
-                // Setup Fitness evaluator
-                BeerEvaluator evaluator = new BeerEvaluator();
-                evaluator.BeerWorld.Tracker.ann = ann;
-                evaluator.BeerWorld.WrapAround = true;
+            eaLoop.FitnessEvaluator = evaluator;
 
-                // More hardcoding
-                evaluator.TimeSteps = 600;
-
-                eaLoop.FitnessEvaluator = evaluator;
-
-                // Set genetic operator
-                BinaryGeneticOperator op = new BinaryGeneticOperator();
-                op.MutationRate = (float)mutationNumeric.Value;
-                op.CrossoverRate = (float)crossoverNumeric.Value;
-                eaLoop.GeneticOperator = op;
+            // Set genetic operator
+            BinaryGeneticOperator op = new BinaryGeneticOperator();
+            op.MutationRate = (float)mutationNumeric.Value;
+            op.CrossoverRate = (float)crossoverNumeric.Value;
+            eaLoop.GeneticOperator = op;
 
 
-                eaLoop.goal = int.MaxValue;
-            }
+            eaLoop.goal = int.MaxValue;
         }
 
         private void SetupAdultSelector()
@@ -261,21 +252,6 @@ namespace Beer
             
             // Run the background worker
             bgw.RunWorkerAsync();
-
-        }
-
-        // Problem ComboBox
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -424,34 +400,9 @@ namespace Beer
 
         }
 
-        private void crossoverNumeric_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mutationNumeric_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void numericAdultCount_ValueChanged(object sender, EventArgs e)
         {
             numericChildCount.Minimum = numericAdultCount.Value;
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void comboBoxParentSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -489,25 +440,7 @@ namespace Beer
             currentSeries = 1;
             chart1.Series.Clear();
         }
-
-        private void comboBoxAdultSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         
-        
-
         private void buttonShowSimulation_Click(object sender, EventArgs e)
         {
             BeerWorld beerWorld = ((BeerEvaluator)eaLoop.FitnessEvaluator).BeerWorld;
