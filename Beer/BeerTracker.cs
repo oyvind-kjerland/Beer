@@ -53,17 +53,6 @@ namespace Beer
                 currentMove = (maxIndex == 0) ? Move.LEFT : Move.RIGHT;
             }
 
-            // Calculate speed
-            //double normalizedOutput = (maxOutput +  5) / 10.0;
-            double normalizedOutput = maxOutput;
-
-            //currentSpeed = (int)Math.Ceiling(maxSpeed * normalizedOutput + 1);
-            //currentSpeed = 2;
-
-            if (maxOutput < 0.9)
-            {
-                currentSpeed = 2;
-            }
 
             // Get speed
             bool includeZero = false;

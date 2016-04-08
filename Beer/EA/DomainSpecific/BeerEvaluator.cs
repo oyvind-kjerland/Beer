@@ -22,8 +22,8 @@ namespace Beer.EA.DomainSpecific
 
         public float CatchWeight = 1;
         public float MissWeight = -1;
-        public float AvoidWeight = 2;
-        public float HitWeight = -1;
+        public float AvoidWeight = 1.25f;
+        public float HitWeight = -1.25f;
 
         public BeerEvaluator()
         {

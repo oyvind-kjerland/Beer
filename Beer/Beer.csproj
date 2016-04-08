@@ -113,6 +113,9 @@
     <Compile Include="Visualizer.Designer.cs">
       <DependentUpon>Visualizer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NN_Visualizer.resx">
       <DependentUpon>NN_Visualizer.cs</DependentUpon>
     </EmbeddedResource>

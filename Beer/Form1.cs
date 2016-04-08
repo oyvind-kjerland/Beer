@@ -76,9 +76,13 @@ namespace Beer
         {
             if (comboBoxProblem.SelectedIndex == CTRNN_INDEX)
             {
+
+                // Temp
+                bool hasPull = true;
+
                 // setup nodes
                 int numSensorNodes = 5;
-                int numMotorNodes = 2;
+                int numMotorNodes = (hasPull) ? 3 : 2;
                 int numLayers = 1;
                 int[] numNodesPerLayer = new int[] { 2 };
 
@@ -108,7 +112,7 @@ namespace Beer
                 developer.NumWeights = numWeights;
 
                 // Hardcoded :D
-                developer.BiasIndices = new int[] { 0, 6, 12, 15 };
+                developer.BiasIndices = (!hasPull) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
 
                 eaLoop.PhenotypeDeveloper = developer;
 
@@ -501,28 +505,8 @@ namespace Beer
 
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            // Do nothing if no layer is selected
-            if (listBoxANN.SelectedIndex < 0) return;
-
-            listBoxANN.Items[listBoxANN.SelectedIndex] = (int)numericNumNodes.Value;
-        }
-
-        private void buttonAddLayer_Click(object sender, EventArgs e)
-        {
-            // Add a new layer
-            listBoxANN.Items.Add((int)numericNumNodes.Value);
-        }
-
-        private void buttonRemoveLayer_Click(object sender, EventArgs e)
-        {
-            // Do nothing if no layer is selected
-            if (listBoxANN.SelectedIndex < 0) return;
-
-            // Remove the selected index
-            listBoxANN.Items.RemoveAt(listBoxANN.SelectedIndex);
-        }
+        
+        
 
         private void buttonShowSimulation_Click(object sender, EventArgs e)
         {
