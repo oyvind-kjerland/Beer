@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.startButton = new System.Windows.Forms.Button();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
             this.labelProblem = new System.Windows.Forms.Label();
@@ -97,12 +97,13 @@
             this.comboBoxProblem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProblem.FormattingEnabled = true;
             this.comboBoxProblem.Items.AddRange(new object[] {
-            "Flatland"});
+            "Standard",
+            "Pull",
+            "No wrap"});
             this.comboBoxProblem.Location = new System.Drawing.Point(66, 11);
             this.comboBoxProblem.Name = "comboBoxProblem";
             this.comboBoxProblem.Size = new System.Drawing.Size(121, 21);
             this.comboBoxProblem.TabIndex = 0;
-            this.comboBoxProblem.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // labelProblem
             // 
@@ -112,7 +113,6 @@
             this.labelProblem.Size = new System.Drawing.Size(48, 13);
             this.labelProblem.TabIndex = 2;
             this.labelProblem.Text = "Problem:";
-            this.labelProblem.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelAdultSelector
             // 
@@ -135,7 +135,6 @@
             this.comboBoxAdultSelector.Name = "comboBoxAdultSelector";
             this.comboBoxAdultSelector.Size = new System.Drawing.Size(121, 21);
             this.comboBoxAdultSelector.TabIndex = 3;
-            this.comboBoxAdultSelector.SelectedIndexChanged += new System.EventHandler(this.comboBoxAdultSelector_SelectedIndexChanged);
             // 
             // labelParentSelector
             // 
@@ -163,22 +162,21 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.Maximum = 100D;
-            chartArea2.AxisX.Minimum = 0D;
-            chartArea2.AxisX.Title = "Generation";
-            chartArea2.AxisY.Title = "Fitness";
-            chartArea2.CursorX.IsUserSelectionEnabled = true;
-            chartArea2.CursorY.IsUserSelectionEnabled = true;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Maximum = 100D;
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.Title = "Generation";
+            chartArea1.AxisY.Title = "Fitness";
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.CursorY.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 295);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(871, 268);
             this.chart1.TabIndex = 8;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // crossoverNumeric
             // 
@@ -202,7 +200,6 @@
             0,
             0,
             65536});
-            this.crossoverNumeric.ValueChanged += new System.EventHandler(this.crossoverNumeric_ValueChanged);
             // 
             // mutationNumeric
             // 
@@ -226,7 +223,6 @@
             0,
             0,
             196608});
-            this.mutationNumeric.ValueChanged += new System.EventHandler(this.mutationNumeric_ValueChanged);
             // 
             // mutationRateLabel
             // 
@@ -236,7 +232,6 @@
             this.mutationRateLabel.Size = new System.Drawing.Size(85, 13);
             this.mutationRateLabel.TabIndex = 13;
             this.mutationRateLabel.Text = "Mutation Rate %";
-            this.mutationRateLabel.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // label1
             // 
@@ -349,7 +344,6 @@
             this.labelTournamentE.Size = new System.Drawing.Size(41, 13);
             this.labelTournamentE.TabIndex = 26;
             this.labelTournamentE.Text = "Epsilon";
-            this.labelTournamentE.Click += new System.EventHandler(this.label6_Click);
             // 
             // labelTournamentK
             // 
@@ -359,7 +353,6 @@
             this.labelTournamentK.Size = new System.Drawing.Size(75, 13);
             this.labelTournamentK.TabIndex = 25;
             this.labelTournamentK.Text = "Group Size (K)";
-            this.labelTournamentK.Click += new System.EventHandler(this.label7_Click);
             // 
             // numericTournamentE
             // 
@@ -508,7 +501,6 @@
             this.labelRankMin.Size = new System.Drawing.Size(24, 13);
             this.labelRankMin.TabIndex = 44;
             this.labelRankMin.Text = "Min";
-            this.labelRankMin.Click += new System.EventHandler(this.label7_Click_1);
             // 
             // numericRankMax
             // 

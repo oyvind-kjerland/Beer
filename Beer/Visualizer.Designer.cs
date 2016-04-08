@@ -101,7 +101,7 @@
             this.numericInterval.Size = new System.Drawing.Size(120, 20);
             this.numericInterval.TabIndex = 2;
             this.numericInterval.Value = new decimal(new int[] {
-            500,
+            50,
             0,
             0,
             0});

@@ -22,12 +22,41 @@ namespace Beer.EA.DomainSpecific
 
         public float CatchWeight = 1;
         public float MissWeight = -1;
-        public float AvoidWeight = 1.25f;
-        public float HitWeight = -1.25f;
+        public float AvoidWeight = 2f;
+        public float HitWeight = -1f;
 
         public BeerEvaluator()
         {
             BeerWorld = new BeerWorld(WORLD_WIDTH, WORLD_HEIGHT);
+        }
+
+        public void SetWeights(int problem_index)
+        {
+            switch(problem_index)
+            {
+                // STANDARD
+                case 0:     
+                    CatchWeight = 1;
+                    MissWeight = -1;
+                    AvoidWeight = 2f;
+                    HitWeight = -1f;
+                    break;
+                // PULL
+                case 1:
+                    CatchWeight = 1;
+                    MissWeight = -1;
+                    AvoidWeight = 2f;
+                    HitWeight = -1f;
+                    break;
+                // NO WRAP
+                case 2:
+                    CatchWeight = 1;
+                    MissWeight = -1;
+                    AvoidWeight = 2f;
+                    HitWeight = -1f;
+                    break;
+            }
+
         }
 
         public override void NextGeneration()
