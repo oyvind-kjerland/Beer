@@ -510,7 +510,11 @@ namespace Beer
 
         private void buttonShowSimulation_Click(object sender, EventArgs e)
         {
-            BeerWorld beerWorld = ((BeerEvaluator)eaLoop.FitnessEvaluator).BeerWorld;
+            Individual best = eaLoop.best;
+            BeerEvaluator evaluator = (BeerEvaluator)eaLoop.FitnessEvaluator;
+            evaluator.Evaluate(best);
+            BeerWorld beerWorld = evaluator.BeerWorld;
+            
             Visualizer visualizer = new Visualizer(beerWorld);
             visualizer.ShowDialog();
         }

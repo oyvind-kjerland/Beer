@@ -182,7 +182,9 @@ namespace Beer
 
         public void UpdateSensors()
         {
-            double[] senseUp = new double[TRACKER_WIDTH];
+            
+            double[] senseUp = (WrapAround) ? new double[TRACKER_WIDTH] : new double[TRACKER_WIDTH+2];
+
             if (BeerObject != null)
             {
                 for (int x = 0; x < Tracker.Width; x++)
@@ -197,6 +199,15 @@ namespace Beer
                     }
                 }
             }
+
+            // Add sensors for left and right edges
+            if (!WrapAround)
+            {
+                // Sense left
+                senseUp[TRACKER_WIDTH] = (Tracker.Left == 0) ? 1 : 0;
+                // Sense right
+                senseUp[TRACKER_WIDTH + 1] = (Tracker.Right == this.Width) ? 1 : 0;
+            } 
 
             Tracker.Sensors = senseUp;
         }
