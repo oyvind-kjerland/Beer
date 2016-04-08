@@ -505,28 +505,8 @@ namespace Beer
 
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            // Do nothing if no layer is selected
-            if (listBoxANN.SelectedIndex < 0) return;
-
-            listBoxANN.Items[listBoxANN.SelectedIndex] = (int)numericNumNodes.Value;
-        }
-
-        private void buttonAddLayer_Click(object sender, EventArgs e)
-        {
-            // Add a new layer
-            listBoxANN.Items.Add((int)numericNumNodes.Value);
-        }
-
-        private void buttonRemoveLayer_Click(object sender, EventArgs e)
-        {
-            // Do nothing if no layer is selected
-            if (listBoxANN.SelectedIndex < 0) return;
-
-            // Remove the selected index
-            listBoxANN.Items.RemoveAt(listBoxANN.SelectedIndex);
-        }
+        
+        
 
         private void buttonShowSimulation_Click(object sender, EventArgs e)
         {
