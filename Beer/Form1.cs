@@ -102,8 +102,21 @@ namespace Beer
             developer.NumTimeConstants = numTimeConstants;
             developer.NumWeights = numWeights;
 
-            // Hardcoded :D
-            developer.BiasIndices = (comboBoxProblem.SelectedIndex != PULL_SCENARIO) ? new int[] { 0, 6, 12, 15 } : new int[] { 0, 6, 12, 15, 18 };
+            // 
+            switch (comboBoxProblem.SelectedIndex)
+            {
+                case STANDARD_SCENARIO:
+                    developer.BiasIndices = new int[] { 0, 8, 16, 21 };
+                    break;
+
+                case PULL_SCENARIO:
+                    developer.BiasIndices = new int[] { 0, 6, 12, 15, 18 };
+                    break;
+
+                case NO_WRAP_SCENARIO:
+
+                    break;
+            }
 
             eaLoop.PhenotypeDeveloper = developer;
 

@@ -28,11 +28,10 @@ namespace Beer.EA.DomainSpecific
             int totalGainsBitLength = NumGains * NumBitsPerUnit;
             int totalTimeConstantsBitLength = NumTimeConstants * NumBitsPerUnit;
 
-            double[] weights = new double[NumWeights];
-            double[] biasWeights = new double[BiasIndices.Length];
+            double[] allWeights = new double[NumWeights];
             double weight = 0;
             int weightIndex = 0;
-            int biasWeightIndex = 0;
+
 
             // Generate weight part
             for (int i = 0; i < totalWeightsBitLength; i++)
@@ -43,29 +42,35 @@ namespace Beer.EA.DomainSpecific
 
                 if (i % NumBitsPerUnit == NumBitsPerUnit - 1)
                 {
-                    // Multiplier for scaling the weight interval for bias weights
-                    int multiplier = (weightIndex == BiasIndices[biasWeightIndex]) ? -5 : 0;
-                    // Calculating a weight between -10 and 0    
-                    weight = (((double)(weight) / max) * 5) + multiplier;
-                    
+                    // Calculating a weight between -5 and 5
+                    weight = (((double)(weight) / max) * 10) - 5;
 
-                    if (weightIndex == BiasIndices[biasWeightIndex])
-                    {
-                        biasWeights[biasWeightIndex] = weight;
-
-                        if (biasWeightIndex < BiasIndices.Length-1) biasWeightIndex++;
-                        weights[weightIndex] = weight;
-                        weight = 0;
-                        weightIndex++;
-                    }
-                    else
-                    {
-                        weights[weightIndex] = weight;
-                        weight = 0;
-                        weightIndex++;
-                    }
+                    allWeights[weightIndex] = weight;
+                    weight = 0;
+                    weightIndex++;
                 }
             }
+
+            // Fix bias weights
+            
+            int biasIndex = 0;
+            double[] biasWeights = new double[BiasIndices.Length];
+            double[] weights = new double[NumWeights - BiasIndices.Length];
+            weightIndex = 0;
+
+            for (int i=0; i<allWeights.Length; i++)
+            {
+                if (biasIndex < BiasIndices.Length && i == BiasIndices[biasIndex])
+                {
+                    biasWeights[biasIndex++] = allWeights[i] - 5;
+                } else
+                {
+                    weights[weightIndex++] = allWeights[i];
+                }
+            }
+
+
+
 
             double[] gains = new double[NumGains];
             int gain = 0;
