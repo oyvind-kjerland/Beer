@@ -110,11 +110,11 @@ namespace Beer
                     break;
 
                 case PULL_SCENARIO:
-                    developer.BiasIndices = new int[] { 0, 6, 12, 15, 18 };
+                    developer.BiasIndices = new int[] { 0, 8, 16, 22, 28 };
                     break;
 
                 case NO_WRAP_SCENARIO:
-
+                    developer.BiasIndices = new int[] { 0, 10, 20, 25 };
                     break;
             }
 
