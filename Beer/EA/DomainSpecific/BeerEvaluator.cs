@@ -36,10 +36,10 @@ namespace Beer.EA.DomainSpecific
             {
                 // STANDARD
                 case 0:     
-                    CatchWeight = 1;
+                    CatchWeight = 1.5f;
                     MissWeight = -1;
-                    AvoidWeight = 2f;
-                    HitWeight = -1f;
+                    AvoidWeight = 2.0f;
+                    HitWeight = -1.2f;
                     break;
                 // PULL
                 case 1:
@@ -50,9 +50,9 @@ namespace Beer.EA.DomainSpecific
                     break;
                 // NO WRAP
                 case 2:
-                    CatchWeight = 1;
+                    CatchWeight = 1.5f;
                     MissWeight = -1;
-                    AvoidWeight = 2f;
+                    AvoidWeight = 1.25f;
                     HitWeight = -1f;
                     break;
             }

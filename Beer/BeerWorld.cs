@@ -40,6 +40,9 @@ namespace Beer
         // Wrap around world
         public bool WrapAround;
 
+        // Has pulled on this timestep
+        public bool hasPulled;
+
         // Sequence (x,width)
         private List<int[]> sequence;
         private int sequenceIndex;
@@ -104,6 +107,8 @@ namespace Beer
 
         public void Update()
         {
+            // Reset has pulled
+            hasPulled = false;
 
             // Check if there is a beer object
             if (BeerObject == null)
@@ -145,6 +150,7 @@ namespace Beer
         {
             CheckHit();
             BeerObject = null;
+            hasPulled = true;
         }
 
         // Check if the tracker hits the beerObject

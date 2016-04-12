@@ -21,6 +21,7 @@ namespace Beer
         // Colors for the world, objects and tracker
         private Color EMPTY_COLOR = Color.White;
         private Color TRACKER_COLOR = Color.Blue;
+        private Color TRACKER_PULL_COLOR = Color.Purple;
         private Color SHADOW_COLOR = Color.DarkBlue;
         private Color BIG_COLOR = Color.Red;
         private Color SMALL_COLOR = Color.Green;
@@ -120,8 +121,6 @@ namespace Beer
 
         private void VisualizerUpdate(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine("Update");
-
             BeerObject[] beerObjects = { beerWorld.BeerObject, beerWorld.Tracker };
             PictureBox pb;
             int startX;
@@ -163,7 +162,8 @@ namespace Beer
                 // Set the correct color
                 if (beerObject.IsTracker)
                 {
-                    color = TRACKER_COLOR;
+                    Console.WriteLine(beerWorld.hasPulled);
+                    color = (beerWorld.hasPulled) ? TRACKER_PULL_COLOR : TRACKER_COLOR;
                     sensors = ((BeerTracker)beerObject).Sensors;
 
                 } else if (beerObject.IsBig)
@@ -191,7 +191,7 @@ namespace Beer
                             pb.BackColor = SHADOW_COLOR;
                         } else
                         {
-                            pb.BackColor = TRACKER_COLOR;
+                            pb.BackColor = (beerWorld.hasPulled) ? TRACKER_PULL_COLOR : TRACKER_COLOR;
                         }
                     }
 
