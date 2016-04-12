@@ -162,7 +162,6 @@ namespace Beer
                 // Set the correct color
                 if (beerObject.IsTracker)
                 {
-                    Console.WriteLine(beerWorld.hasPulled);
                     color = (beerWorld.hasPulled) ? TRACKER_PULL_COLOR : TRACKER_COLOR;
                     sensors = ((BeerTracker)beerObject).Sensors;
 

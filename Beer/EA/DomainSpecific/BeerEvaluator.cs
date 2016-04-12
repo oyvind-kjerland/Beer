@@ -50,9 +50,9 @@ namespace Beer.EA.DomainSpecific
                     break;
                 // NO WRAP
                 case 2:
-                    CatchWeight = 1;
-                    MissWeight = 0;
-                    AvoidWeight = 0;
+                    CatchWeight = 1.5f;
+                    MissWeight = -1;
+                    AvoidWeight = 1.2f;
                     HitWeight = -1;
                     break;
             }
