@@ -20,10 +20,10 @@ namespace Beer.EA.DomainSpecific
         // Settings
         public int TimeSteps { get; set; }
 
-        public float CatchWeight = 1;
-        public float MissWeight = -1;
-        public float AvoidWeight = 2f;
-        public float HitWeight = -1f;
+        public float CatchWeight;
+        public float MissWeight;
+        public float AvoidWeight;
+        public float HitWeight;
 
         public BeerEvaluator()
         {
@@ -38,22 +38,22 @@ namespace Beer.EA.DomainSpecific
                 case 0:     
                     CatchWeight = 1;
                     MissWeight = -1;
-                    AvoidWeight = 2f;
+                    AvoidWeight = 1.25f;
                     HitWeight = -1f;
                     break;
                 // PULL
                 case 1:
                     CatchWeight = 1;
-                    MissWeight = -1;
+                    MissWeight = -1.5f;
                     AvoidWeight = 2f;
                     HitWeight = -1f;
                     break;
                 // NO WRAP
                 case 2:
                     CatchWeight = 1;
-                    MissWeight = -1;
-                    AvoidWeight = 2f;
-                    HitWeight = -1f;
+                    MissWeight = 0;
+                    AvoidWeight = 0;
+                    HitWeight = -1;
                     break;
             }
 

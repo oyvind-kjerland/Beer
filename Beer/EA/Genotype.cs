@@ -10,5 +10,6 @@ namespace Beer
     {
         abstract public Genotype Clone();
         abstract public void Randomize(Random random);
+        virtual public string GetGenotypeString() { return null; }
     }
 }

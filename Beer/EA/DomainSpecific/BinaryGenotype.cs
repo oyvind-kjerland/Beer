@@ -34,5 +34,15 @@ namespace Beer.EA.DomainSpecific
             BitVector.CopyTo(newGenotype.BitVector, 0);
             return newGenotype;
         }
+        
+        override public string GetGenotypeString()
+        {
+            String bitstr = "";
+            for (int i=0; i<BitVector.Length; i++)
+            {
+                bitstr += BitVector[i];
+            }
+            return bitstr;
+        }
     }
 }

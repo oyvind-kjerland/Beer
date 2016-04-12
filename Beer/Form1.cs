@@ -65,6 +65,56 @@ namespace Beer
             comboBoxProblem.SelectedIndex = 0;
             comboBoxAdultSelector.SelectedIndex = 0;
             comboBoxParentSelector.SelectedIndex = TOURNAMENT_INDEX;
+            numericChildCount.Value = 20;
+
+            // TEMP
+            TestANN();
+        }
+
+        private void TestANN()
+        {
+
+            // TEMP Testing
+            eaLoop = new EALoop();
+            SetupProblem();
+
+            String bitstr = "01001011011111100001111000110101101101100001101111001100011111010101101110111010010011010111110110010111101111001111001001101101110111100010001110001010001110011011011101111111110111100101111110101110100001100101011010100100111110010000101111000110001010000101101001010010";
+            // Turn into bitVector
+            int l = bitstr.Length;
+            int[] bitVector = new int[l];
+            for (int i = 0; i < l; i++)
+            {
+                bitVector[i] = int.Parse("" + bitstr[i]);
+            }
+
+            BinaryGenotype genotype = new BinaryGenotype(l);
+            genotype.BitVector = bitVector;
+
+            CTRNNPhenotype phenotype = (CTRNNPhenotype)eaLoop.PhenotypeDeveloper.Develop(genotype);
+
+            ANN ann = ((BeerEvaluator)eaLoop.FitnessEvaluator).BeerWorld.Tracker.ann;
+            ann.Setup(phenotype.Weights, phenotype.BiasWeights, phenotype.Gains, phenotype.TimeConstant);
+
+
+
+            // Testing the ANN
+            Neuron[] outputLayer = ann.GetLayers()[2].nodes;
+            double[] input;
+            int d;
+            // Set input
+            input = new double[]{ 0, 0, 0, 0, 1 };
+            ann.Run(input);
+            d = 1;
+
+            // Set new input
+            for (int i=0; i<100; i++)
+            {
+                input = new double[] { 0, 0, 0, 1, 0};
+                ann.Run(input);
+                d = 1;
+            }
+            
+
         }
 
 
@@ -102,6 +152,13 @@ namespace Beer
             developer.NumTimeConstants = numTimeConstants;
             developer.NumWeights = numWeights;
 
+            // Setup Fitness evaluator
+            BeerEvaluator evaluator = new BeerEvaluator();
+            evaluator.SetWeights(comboBoxProblem.SelectedIndex);
+            evaluator.BeerWorld.Tracker.ann = ann;
+            evaluator.BeerWorld.WrapAround = (comboBoxProblem.SelectedIndex != NO_WRAP_SCENARIO);
+
+
             // 
             switch (comboBoxProblem.SelectedIndex)
             {
@@ -120,11 +177,6 @@ namespace Beer
 
             eaLoop.PhenotypeDeveloper = developer;
 
-            // Setup Fitness evaluator
-            BeerEvaluator evaluator = new BeerEvaluator();
-            evaluator.SetWeights(comboBoxProblem.SelectedIndex);
-            evaluator.BeerWorld.Tracker.ann = ann;
-            evaluator.BeerWorld.WrapAround = (comboBoxProblem.SelectedIndex != NO_WRAP_SCENARIO);
 
             // More hardcoding
             evaluator.TimeSteps = 600;
@@ -352,7 +404,7 @@ namespace Beer
             Debug.WriteLine("sd: " + sd.ToString());
             if (eaLoop.best != null)
             {
-                Debug.WriteLine("best: " + eaLoop.best.Phenotype.GetPhenotypeString());
+                Debug.WriteLine("best: " + eaLoop.best.Genotype.GetGenotypeString());
             }
             
         }
