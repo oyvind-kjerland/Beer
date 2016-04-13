@@ -195,7 +195,7 @@ namespace Beer
             {
                 for (int x = 0; x < Tracker.Width; x++)
                 {
-                    if (x + Tracker.X >= BeerObject.Left && x + Tracker.X < BeerObject.Right)
+                    if ((x + Tracker.X)%Width >= BeerObject.Left && (x + Tracker.X)%Width < BeerObject.Right)
                     {
                         senseUp[x] = 1;
                     }
