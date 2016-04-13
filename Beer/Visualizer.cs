@@ -110,6 +110,7 @@ namespace Beer
                     break;
                 }
                 bgw.ReportProgress(0);
+                interval = (int)numericInterval.Value;
                 System.Threading.Thread.Sleep(interval);
             }
 

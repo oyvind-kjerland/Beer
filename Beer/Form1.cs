@@ -68,7 +68,7 @@ namespace Beer
             numericChildCount.Value = 20;
 
             // TEMP
-            TestANN();
+            //TestANN();
         }
 
         private void TestANN()
@@ -101,20 +101,62 @@ namespace Beer
             Neuron[] outputLayer = ann.GetLayers()[2].nodes;
             double[] input;
             int d;
-            // Set input
-            input = new double[]{ 0, 0, 0, 0, 1 };
+
+            double output1, output2;
+
+            // Feed with no boxes
+            for (int i=0; i<10; i++)
+            {
+                input = new double[] { 0, 0, 0, 0, 0 };
+                ann.Run(input);
+            }
+
+            output1 = outputLayer[1].output;
+            output2 = outputLayer[2].output;
+            d = 1;
+
+            // Set new input
+            input = new double[]{ 0, 0, 0, 1, 1 };
             ann.Run(input);
+            output1 = outputLayer[1].output;
+            output2 = outputLayer[2].output;
+            d = 1;
+
+            // Moves 1 right
+            input = new double[] { 0, 0, 1, 1, 0 };
+            ann.Run(input);
+            output1 = outputLayer[1].output;
+            output2 = outputLayer[2].output;
+            d = 1;
+
+            // Move one left
+            input = new double[] { 0, 1, 1, 0, 0 };
+            ann.Run(input);
+            output1 = outputLayer[1].output;
+            output2 = outputLayer[2].output;
+            d = 1;
+
+            // Moves 1 right
+            input = new double[] { 0, 0, 1, 1, 0 };
+            ann.Run(input);
+            output1 = outputLayer[1].output;
+            output2 = outputLayer[2].output;
             d = 1;
 
             // Set new input
             for (int i=0; i<100; i++)
             {
-                input = new double[] { 0, 0, 0, 1, 0};
+                input = new double[] { 1, 0, 0, 0, 0};
                 ann.Run(input);
+                
                 d = 1;
             }
+            eaLoop.FitnessEvaluator.NextGeneration();
             
-
+            BeerWorld beerWorld = ((BeerEvaluator)eaLoop.FitnessEvaluator).BeerWorld;
+            
+            Visualizer visualizer = new Visualizer(((BeerEvaluator)eaLoop.FitnessEvaluator).BeerWorld);
+            visualizer.ShowDialog();
         }
 
 
